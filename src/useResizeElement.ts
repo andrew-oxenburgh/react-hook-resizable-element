@@ -2,11 +2,11 @@ import { useEffect, MutableRefObject, DependencyList } from 'react';
 
 /**
  * A react custom hook that will resize a text element based on the height of the text.
- * @example 
+ * @example
  * const ref = useRef();
  * useResizeElement(ref, { min: 100, max: 500, gapAtBottom: 10 });
  * <textarea ref={ref}></textarea>
- * @example 
+ * @example
  * const ref = useRef();
  * useResizeElement(ref);
  * <textarea ref={ref}></textarea>
@@ -18,26 +18,26 @@ import { useEffect, MutableRefObject, DependencyList } from 'react';
  * @returns {Error}
  */
 export function UseResizeElementError(msg: string): Error {
-    return new Error(`Error in useResizeElement: ${msg}`);
+  return new Error(`Error in useResizeElement: ${msg}`);
 }
 
 /**
  * This is what we need the Element to have for this to work.
  */
 export type ResizableElementShape = {
-    scrollHeight: number
-    style: {
-        height: string
-    }
-}
+  scrollHeight: number;
+  style: {
+    height: string;
+  };
+};
 
 /**
  * Options that may passed to useResizeElement.
  */
 export type ResizeElementOptions = {
-    min: number
-    max: number
-    gapAtBottom: number
+  min: number;
+  max: number;
+  gapAtBottom: number;
 };
 
 /**
@@ -45,9 +45,9 @@ export type ResizeElementOptions = {
  * @defaultValue
  */
 const defaultOptions: ResizeElementOptions = {
-    min: 0,
-    max: 1000,
-    gapAtBottom: 0,
+  min: 0,
+  max: 1000,
+  gapAtBottom: 0,
 };
 
 /**
@@ -58,11 +58,11 @@ const defaultOptions: ResizeElementOptions = {
  * @returns void
  */
 export function isNullThrowError(v: unknown, msg: string): void {
-    // is v null or undefined
-    if (v == null) {
-        throw UseResizeElementError(msg);
-        // return
-    }
+  // is v null or undefined
+  if (v == null) {
+    throw UseResizeElementError(msg);
+    // return
+  }
 }
 
 /**
@@ -78,12 +78,23 @@ export function isNullThrowError(v: unknown, msg: string): void {
  * @returns void if successful
  * @throws {Error} if element is invalid
  */
-export function throwErrorIfElementIsInvalid(eleRef: MutableRefObject<any>): void {
-    isNullThrowError(eleRef, 'eleRef is null');
-    isNullThrowError(eleRef.current, 'eleRef.current is null');
-    isNullThrowError(eleRef.current.style, 'eleRef doesn\'t have a style property');
-    isNullThrowError(eleRef.current.style.height, 'eleRef doesn\'t have a style.height property');
-    isNullThrowError(eleRef.current.scrollHeight, 'eleRef doesn\'t have a scrollHeight property');
+export function throwErrorIfElementIsInvalid(
+  eleRef: MutableRefObject<ResizableElementShape>
+): void {
+  isNullThrowError(eleRef, 'eleRef is null');
+  isNullThrowError(eleRef.current, 'eleRef.current is null');
+  isNullThrowError(
+    eleRef.current.style,
+    "eleRef doesn't have a style property"
+  );
+  isNullThrowError(
+    eleRef.current.style.height,
+    "eleRef doesn't have a style.height property"
+  );
+  isNullThrowError(
+    eleRef.current.scrollHeight,
+    "eleRef doesn't have a scrollHeight property"
+  );
 }
 
 /**
@@ -92,11 +103,14 @@ export function throwErrorIfElementIsInvalid(eleRef: MutableRefObject<any>): voi
  * @param {ResizeElementOptions} opts - The options for the resize element.
  * @returns {string} The desired height of the element in pixels.
  */
-export function findDesiredHeightInPixels(scrollHeight: number, opts: ResizeElementOptions): string {
-    let desiredHeight = Math.max(scrollHeight, opts.min);
-    desiredHeight = Math.min(desiredHeight, opts.max);
-    desiredHeight += opts.gapAtBottom;
-    return desiredHeight + 'px';
+export function findDesiredHeightInPixels(
+  scrollHeight: number,
+  opts: ResizeElementOptions
+): string {
+  let desiredHeight = Math.max(scrollHeight, opts.min);
+  desiredHeight = Math.min(desiredHeight, opts.max);
+  desiredHeight += opts.gapAtBottom;
+  return `${desiredHeight}px`;
 }
 
 /**
@@ -105,31 +119,31 @@ export function findDesiredHeightInPixels(scrollHeight: number, opts: ResizeElem
  * @param {ResizeElementOptions} opts
  */
 export function resizeElement(
-    eleRef: MutableRefObject<ResizableElementShape | null>,
-    calcHeight: (scrollHeight: number, opts: ResizeElementOptions) => string,
-    opts: ResizeElementOptions
+  eleRef: MutableRefObject<ResizableElementShape | null>,
+  calcHeight: (scrollHeight: number, opts: ResizeElementOptions) => string,
+  opts: ResizeElementOptions
 ): void {
-    // gate keeper
-    throwErrorIfElementIsInvalid(eleRef);
-    const ele = eleRef.current as ResizableElementShape;
+  // gate keeper
+  throwErrorIfElementIsInvalid(eleRef);
+  const ele = eleRef.current as ResizableElementShape;
 
-    // Just get bits I need
-    resizeElementPostValidation(ele, calcHeight, opts);
+  // Just get bits I need
+  resizeElementPostValidation(ele, calcHeight, opts);
 }
 
 export function resizeElementPostValidation(
-    ele: ResizableElementShape,
-    calcHeight: (scrollHeight: number, opts: ResizeElementOptions) => string,
-    opts: ResizeElementOptions = defaultOptions
+  ele: ResizableElementShape,
+  calcHeight: (scrollHeight: number, opts: ResizeElementOptions) => string,
+  opts: ResizeElementOptions = defaultOptions
 ): void {
-    ele.style.height = '0px';
+  ele.style.height = '0px';
 
-    // get the scrollHeight`
-    const newHeight = ele.scrollHeight;
+  // get the scrollHeight`
+  const newHeight = ele.scrollHeight;
 
-    // set bounds and add gapAtBottom
-    // set height
-    ele.style.height = calcHeight(newHeight, opts);
+  // set bounds and add gapAtBottom
+  // set height
+  ele.style.height = calcHeight(newHeight, opts);
 }
 
 /**
@@ -138,11 +152,11 @@ export function resizeElementPostValidation(
  * @param {ResizeElementOptions} [options]
  */
 export function useResizeElement(
-    ele: MutableRefObject<ResizableElementShape | null>,
-    deps: DependencyList,
-    options: ResizeElementOptions = defaultOptions
+  ele: MutableRefObject<ResizableElementShape | null>,
+  deps: DependencyList,
+  options: ResizeElementOptions = defaultOptions
 ): void {
-    useEffect(() => {
-        resizeElement(ele, findDesiredHeightInPixels, options);
-    }, deps);
+  useEffect(() => {
+    resizeElement(ele, findDesiredHeightInPixels, options);
+  }, deps);
 }
