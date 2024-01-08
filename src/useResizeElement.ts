@@ -79,20 +79,20 @@ export function isNullThrowError(v: unknown, msg: string): void {
  * @throws {Error} if element is invalid
  */
 export function throwErrorIfElementIsInvalid(
-    eleRef: MutableRefObject<ResizableElementShape>
+    eleRef: MutableRefObject<ResizableElementShape | null>
 ): void {
     isNullThrowError(eleRef, 'eleRef is null');
     isNullThrowError(eleRef.current, 'eleRef.current is null');
     isNullThrowError(
-        eleRef.current.style,
+        eleRef?.current?.style,
         "eleRef doesn't have a style property"
     );
     isNullThrowError(
-        eleRef.current.style.height,
+        eleRef?.current?.style.height,
         "eleRef doesn't have a style.height property"
     );
     isNullThrowError(
-        eleRef.current.scrollHeight,
+        eleRef?.current?.scrollHeight,
         "eleRef doesn't have a scrollHeight property"
     );
 }
