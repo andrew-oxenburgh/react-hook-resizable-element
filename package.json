@@ -118,5 +118,8 @@
       "@semantic-release/npm",
       "@semantic-release/github"
     ]
+  },
+  "dependencies": {
+    "react": "^18.2.0"
   }
 }
