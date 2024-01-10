@@ -1,6 +1,6 @@
 {
   "name": "react-hook-resizable-element",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "React hook to resize an element based on content",
   "main": "./lib/index.js",
   "type": "module",
