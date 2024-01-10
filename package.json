@@ -20,22 +20,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ryansonshine/typescript-npm-package-template.git"
+    "url": "git+https://github.com/andrew-oxenburgh/react-hook-resizable-element.git"
   },
   "license": "MIT",
   "author": {
-    "name": "Ryan Sonshine",
-    "email": "ryansonshine@users.noreply.github.com",
-    "url": "https://github.com/ryansonshine"
+    "name": "Andrew Oxenburgh",
+    "email": "andrew.oxenburgh@gmail.com",
+    "url": "https://github.com/andrew-oxenburgh"
   },
   "engines": {
     "node": ">=12.0"
   },
   "keywords": [
-    "boilerplate",
-    "template",
+    "react",
+    "hook",
     "typescript",
-    "vscode",
+    "useeffect",
     "jest",
     "husky",
     "commitizen",
@@ -43,15 +43,14 @@
     "codecov"
   ],
   "bugs": {
-    "url": "https://github.com/ryansonshine/typescript-npm-package-template/issues"
+    "url": "https://github.com/andrew-oxenburgh/react-hook-resizable-element/issues"
   },
-  "homepage": "https://github.com/ryansonshine/typescript-npm-package-template#readme",
+  "homepage": "https://github.com/andrew-oxenburgh/react-hook-resizable-element#readme",
   "devDependencies": {
-    "@ryansonshine/commitizen": "^4.2.8",
-    "@ryansonshine/cz-conventional-changelog": "^3.3.4",
+    "react": "^18.2",
     "@types/jest": "^27.5.2",
     "@types/node": "^12.20.11",
-    "@types/react": "^18.2.47",
+    "@types/react": "^18.2",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
     "conventional-changelog-conventionalcommits": "^5.0.0",
@@ -64,11 +63,6 @@
     "ts-jest": "^27.0.5",
     "ts-node": "^10.2.1",
     "typescript": "^4.2.4"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/@ryansonshine/cz-conventional-changelog"
-    }
   },
   "lint-staged": {
     "*.ts": "eslint --cache --cache-location .eslintcache --fix"
@@ -117,8 +111,5 @@
       "@semantic-release/npm",
       "@semantic-release/github"
     ]
-  },
-  "dependencies": {
-    "react": "^18.2.0"
   }
 }

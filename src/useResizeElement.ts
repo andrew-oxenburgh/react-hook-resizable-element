@@ -61,7 +61,7 @@ export function isNullThrowError(v: unknown, msg: string): void {
     // is v null or undefined
     if (v == null) {
         throw UseResizeElementError(msg);
-    // return
+        // return
     }
 }
 
@@ -161,3 +161,6 @@ export function useResizeElement(
         resizeElement(ele, findDesiredHeightInPixels, options);
     }, deps);
 }
+
+export default useResizeElement
+
