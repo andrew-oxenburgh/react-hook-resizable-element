@@ -9,6 +9,11 @@ Works with any HTMLElement that has the following attributes:
 
  I wrote it specifically for teaxtarea, and checked it on `textarea` and `p` elements.
 
+## Links
+[github](https://github.com/andrew-oxenburgh/react-hook-resizable-element)
+
+[npm](https://www.npmjs.com/package/react-hook-resizable-element)
+
 ## Credits
 
  [template for typescript NPM](https://github.com/ryansonshine/typescript-npm-package-template)
